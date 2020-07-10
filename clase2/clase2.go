@@ -1,10 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 	fmt.Println()
-	fmt.Println("Puntero")
+	fmt.Println("Referencia")
 	fmt.Println("-----------")
 
 	a := 5
@@ -18,7 +21,6 @@ func main() {
 	fmt.Println()
 	fmt.Println("Array")
 	fmt.Println("-----------")
-	fmt.Println()
 
 	var arr [5]int
 	arr[0] = 1
@@ -32,7 +34,6 @@ func main() {
 	fmt.Println()
 	fmt.Println("Slice")
 	fmt.Println("-----------")
-	fmt.Println()
 
 	var s = []int{1, 2, 3}
 	fmt.Println(s)
@@ -51,7 +52,6 @@ func main() {
 	fmt.Println()
 	fmt.Println("Map")
 	fmt.Println("-----------")
-	fmt.Println()
 
 	m1 := map[string]string{"foo": "bar"}
 	m1["hola"] = "mundo"
@@ -81,5 +81,60 @@ func main() {
 	fmt.Println()
 	fmt.Println("Struct")
 	fmt.Println("-----------")
+
+	cir := Circulo{Radio: 1.2, X: 100, Y: 200}
+	fmt.Println(cir)
+	fmt.Printf("%#v\n", cir)
+	fmt.Println(cir.Radio)
 	fmt.Println()
+
+	cir2 := NewCirculo()
+	cir2.SetRadio(1.5)
+	fmt.Println(cir2.Area())
+	fmt.Println(cir2)
+	ImprimirArea(cir2)
+
+	rect := &Rectangulo{Ancho: 1.3, Alto: 1.5}
+	ImprimirArea(rect)
+}
+
+// Circulo struct
+type Circulo struct {
+	Radio float64
+	X, Y  int
+}
+
+// Area returns de circle area
+func (c *Circulo) Area() float64 {
+	return math.Pi * math.Pow(c.Radio, 2)
+}
+
+// SetRadio sets Circle radio
+func (c *Circulo) SetRadio(newRadio float64) {
+	c.Radio = newRadio
+}
+
+// NewCirculo returns a reference to a new circulo
+func NewCirculo() *Circulo {
+	return &Circulo{Radio: 1, X: 1, Y: 1}
+}
+
+// Rectangulo struct
+type Rectangulo struct {
+	Ancho, Alto float64
+}
+
+// Area returns de Rectangulo area
+func (r *Rectangulo) Area() float64 {
+	return r.Alto * r.Ancho
+}
+
+// Figura interface
+type Figura interface {
+	Area() float64
+}
+
+// ImprimirArea imprime el area de una Figura
+func ImprimirArea(f Figura) {
+	fmt.Printf("El area es: %f\n", f.Area())
 }
