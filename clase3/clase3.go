@@ -79,6 +79,17 @@ func goAwait(foo func()) {
 	<-done
 }
 
+type pares struct {
+	a, b int
+}
+
+func multiplicar(req chan pares, res chan int) {
+	for p := range req {
+		res <- p.a * p.b
+	}
+	close(res)
+}
+
 func concurrencia() {
 	fmt.Println("Concurrencia")
 	go impGoRoutine()
@@ -115,6 +126,22 @@ func concurrencia() {
 	fmt.Println("Done")
 	goAwait(do)
 	fmt.Println("Done2")
+	fmt.Println()
+
+	fmt.Println("Channels req/res")
+	cant := 10
+	req := make(chan pares, cant)
+	res := make(chan int, cant)
+
+	go multiplicar(req, res)
+	for i := 0; i < cant; i++ {
+		req <- pares{a: i, b: i + 1}
+	}
+	close(req)
+	for r := range res {
+		fmt.Println(r)
+	}
+	fmt.Println()
 }
 
 func main() {
