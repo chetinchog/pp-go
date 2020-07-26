@@ -21,7 +21,7 @@ type Person struct {
 }
 
 func initJSON() {
-	fmt.Println("Struct to JSON")
+	fmt.Println("> Struct to JSON")
 	martin := Person{
 		Name:     "Martin",
 		LastName: "Gonzalez",
@@ -40,7 +40,7 @@ func initJSON() {
 	fmt.Println(string(bs))
 	fmt.Println()
 
-	fmt.Println("JSON to Struct")
+	fmt.Println("< JSON to Struct")
 	var newPerson Person
 	jsonBs := []byte(`{"name":"Martin","last_name":"Gonzalez","age":26,"handle":"@ictg","private":"private","password":"password"}`)
 	err2 := json.Unmarshal(jsonBs, &newPerson)
