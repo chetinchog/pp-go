@@ -67,7 +67,7 @@ func randw() {
 	}
 }
 
-// GitHubDTO get response struct
+// UserGHDTO get response struct
 type UserGHDTO struct {
 	Login             string      `json:"login"`
 	ID                int         `json:"id"`
