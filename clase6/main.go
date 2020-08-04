@@ -16,6 +16,7 @@ func prod() {
 }
 
 func main() {
+	fmt.Println()
 	fmt.Println("Clase 6")
 	fmt.Println("--------------")
 	fmt.Println()
