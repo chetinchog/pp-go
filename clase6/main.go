@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/chetinchog/pp-go/clase6/product"
+	"github.com/fatih/color"
 )
 
 func prod() {
@@ -13,6 +14,9 @@ func prod() {
 		Price: 100,
 	}
 	fmt.Printf("%#v\n", pro)
+	color.Red(fmt.Sprintf("%#v", pro))
+	color.Green(fmt.Sprintf("%#v", pro))
+	color.Blue(fmt.Sprintf("%#v", pro))
 }
 
 func main() {
